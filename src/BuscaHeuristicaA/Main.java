@@ -5,6 +5,8 @@
  */
 package BuscaHeuristicaA;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author diego
@@ -22,7 +24,24 @@ public class Main {
         Aresta a3 = new Aresta(oeiras, floriano.getAlvo(), 70);
         Aresta a4 = new Aresta(gaturiano, floriano.getAlvo(), 200);
         
-        System.out.println(a1.getDistancia());
+        ArrayList<Aresta> arestas = new ArrayList<>();
+        arestas.add(a1);
+        arestas.add(a2);
+        arestas.add(a3);
+        arestas.add(a4);
+        //System.out.println(picos.vizinhos(arestas));
+        //Vertice a = picos.vizinhos(arestas).get(4);
+        /*
+        picos.getDistanciaParaVizinho(picos.vizinhos(arestas).get(4), arestas);
+        for(int i=0; i<picos.vizinhos(arestas).size(); i++){
+            System.out.println(picos.vizinhos(arestas).get(i));
+        }
+        System.out.println(picos.getDistanciaParaVizinho(oeiras, arestas));
+        //System.out.println(arestas.get(1).getVertice1().getCidade());
+        //System.out.println(a1.getDistancia());
+        */
+        double melhor = floriano.melhor_caminho(picos, arestas);
+        System.out.println(melhor);
         
         
     }
