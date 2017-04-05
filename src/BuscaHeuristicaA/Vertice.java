@@ -50,10 +50,9 @@ public class Vertice {
     
     public double getDistanciaParaVizinho(Vertice vizinho, ArrayList<Aresta> arestas){
         //ArrayList<Vertice> v = new ArrayList<>();
+        //System.out.println(arestas.size());
         for(int i = 0; i < arestas.size(); i++){
-            if(arestas.get(i).getVertice1().equals(this)){
-                return arestas.get(i).getDistancia();
-            }else if(arestas.get(i).getVertice2().equals(this)){
+            if((arestas.get(i).getVertice1().equals(this) && arestas.get(i).getVertice2().equals(vizinho)) || (arestas.get(i).getVertice2().equals(this) && arestas.get(i).getVertice1().equals(vizinho))){
                 return arestas.get(i).getDistancia();
             }
         }

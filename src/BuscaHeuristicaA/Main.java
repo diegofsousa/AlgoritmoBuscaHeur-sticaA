@@ -31,17 +31,22 @@ public class Main {
         arestas.add(a4);
         //System.out.println(picos.vizinhos(arestas));
         //Vertice a = picos.vizinhos(arestas).get(4);
-        /*
-        picos.getDistanciaParaVizinho(picos.vizinhos(arestas).get(4), arestas);
+        
+        //picos.getDistanciaParaVizinho(picos.vizinhos(arestas).get(4), arestas);
+         /*
         for(int i=0; i<picos.vizinhos(arestas).size(); i++){
-            System.out.println(picos.vizinhos(arestas).get(i));
+            System.out.println(picos.vizinhos(arestas).get(i).getCidade());
+            //System.out.println(picos.vizinhos(arestas).get(i).getCidade());
         }
+       
         System.out.println(picos.getDistanciaParaVizinho(oeiras, arestas));
         //System.out.println(arestas.get(1).getVertice1().getCidade());
         //System.out.println(a1.getDistancia());
         */
-        double melhor = floriano.melhor_caminho(picos, arestas);
+        double melhor = floriano.melhor_caminho(picos, 0, arestas);
         System.out.println(melhor);
+        
+        //System.out.println(picos.getDistanciaParaVizinho(oeiras, arestas));
         
         
     }
