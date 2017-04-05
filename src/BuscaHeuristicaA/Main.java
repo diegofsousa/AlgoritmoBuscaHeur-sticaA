@@ -15,8 +15,8 @@ public class Main {
     public static void main(String[] args) {
         Alvo floriano =  new Alvo(new Vertice("Floriano", 0));
         
-        Vertice oeiras = new Vertice("Oeiras", 300);        
-        Vertice gaturiano = new Vertice("Gaturiano", 400);
+        Vertice oeiras = new Vertice("Oeiras", 80);        
+        Vertice gaturiano = new Vertice("Gaturiano", 270);
         Vertice picos = new Vertice("Picos", 500);
         
         Aresta a1 = new Aresta(picos, oeiras, 100);
@@ -43,8 +43,18 @@ public class Main {
         //System.out.println(arestas.get(1).getVertice1().getCidade());
         //System.out.println(a1.getDistancia());
         */
-        double melhor = floriano.melhor_caminho(picos, 0, arestas);
-        System.out.println(melhor);
+        ArrayList<CaminhoResultante> resultado = new ArrayList<>();
+        
+        System.out.println("\nLOGS: \n\n");
+        resultado = floriano.melhor_caminho(picos, 0, arestas, resultado);
+        
+        
+        System.out.println("\n\nResultado:");
+        System.out.println(resultado.size());
+        for(int i=0;i<resultado.size(); i++){
+            System.out.println("Visitou: "+ resultado.get(i).getEstagio_atual().getCidade() +" e a distancia gradual foi: "+ resultado.get(i).getSomatorio_caminho());
+        }
+        //System.out.println(melhor);
         
         //System.out.println(picos.getDistanciaParaVizinho(oeiras, arestas));
         
