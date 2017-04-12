@@ -31,6 +31,8 @@ public class GUI extends JFrame implements ActionListener{
         this.stringAlvo = stringAlvo;
         
         alvo =  new Alvo(new Vertice(stringAlvo, 0));
+        vertices.add(alvo.getAlvo());
+        //atualizaComboBox();
         
         JTabbedPane tabs = new JTabbedPane();
         JPanel painelVertices = new JPanel();
@@ -167,6 +169,7 @@ public class GUI extends JFrame implements ActionListener{
         painelVertices.setLayout(null);
         
         botaoNovoVertice.addActionListener(this);
+        botaoNovaAresta.addActionListener(this);
         
         
         tabs.addTab("Vértices", painelVertices);
@@ -194,8 +197,22 @@ public class GUI extends JFrame implements ActionListener{
              if(validarCamposVertices(campoNovoVertice.getText(), campoNovoVerticeDistancia.getText())){
                  vertices.add(new Vertice(campoNovoVertice.getText(), Double.parseDouble(campoNovoVerticeDistancia.getText())));
                  modelo.add(0, "Vértice: "+ campoNovoVertice.getText() + " - Distância para o alvo: " + campoNovoVerticeDistancia.getText());
+                 atualizaComboBox();
              } 
+         }else if(e.getActionCommand().equals("Adicionar aresta")){
+             System.out.println("Adicionando aresta");
+             Vertice sel = (Vertice) listaVesticesHome.getSelectedItem();
+             System.out.println(sel.getCidade());
          }
+    }
+    
+    public void atualizaComboBox(){
+        listaVesticesHome.removeAllItems();
+        listaVesticesAway.removeAllItems();
+        for (int i = 0; i < vertices.size(); i++) {
+            listaVesticesHome.addItem(vertices.get(i));
+            listaVesticesAway.addItem(vertices.get(i));
+        }
     }
     
     public boolean validarCamposVertices(String nome, String dist){

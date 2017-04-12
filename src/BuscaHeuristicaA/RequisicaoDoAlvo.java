@@ -7,6 +7,8 @@ package BuscaHeuristicaA;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -44,6 +46,22 @@ public class RequisicaoDoAlvo extends JFrame implements ActionListener{
     }
     
     public static void main(String[] args) {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("com.sun.java.swing.plaf.gtk.GTKLookAndFeel".equals(info.getClassName())) {   
+                try {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(RequisicaoDoAlvo.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(RequisicaoDoAlvo.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(RequisicaoDoAlvo.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(RequisicaoDoAlvo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               break;
+             } 
+        }
         new RequisicaoDoAlvo();
     }
 
