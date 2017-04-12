@@ -33,7 +33,5 @@ public class CaminhoResultante {
     public void setEstagio_atual(Vertice estagio_atual) {
         this.estagio_atual = estagio_atual;
     }
-    
-    
-    
+        
 }
