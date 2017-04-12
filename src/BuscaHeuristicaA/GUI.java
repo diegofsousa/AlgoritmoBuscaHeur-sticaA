@@ -19,9 +19,9 @@ public class GUI extends JFrame implements ActionListener{
     JTextField campoNovoVertice;
     JTextField campoNovoVerticeDistancia, campoNovaArestaDist;
     JButton botaoNovoVertice, botaoLimparVertices, botaoLimparArestas, botaoPesquisar;
-    JPanel listaDeVertices, listaDeArestas;
-    JList lista, listaAresta;
-    DefaultListModel modelo, modeloAresta;
+    JPanel listaDeVertices, listaDeArestas, listaDeResultado;
+    JList lista, listaAresta, listaResultado;
+    DefaultListModel modelo, modeloAresta, modeloResultado;
     String stringAlvo;
     Alvo alvo;
     ArrayList<Vertice> vertices = new ArrayList<>();
@@ -187,9 +187,30 @@ public class GUI extends JFrame implements ActionListener{
         botaoPesquisar.setSize(190, 25);
         botaoPesquisar.setLocation(540, 20);
         
+        modeloResultado = new DefaultListModel();
+        listaResultado = new JList(modeloResultado);
+        listaResultado.setSize(700, 200);
+        listaResultado.setLocation(50, 65);
+        
+        
+        JScrollPane scrollPaneResultado = new JScrollPane();
+
+        //modelo.add(0, "diego fernando");
+        
+        
+        
+        scrollPaneResultado.getViewport().add(listaResultado);
+
+        listaDeResultado = new JPanel();
+        listaDeResultado.setLayout(new GridLayout(0, 2));
+        listaDeResultado.setSize(1500,250);
+        listaDeResultado.setLocation(30, 85);
+        listaDeResultado.add(scrollPaneResultado);
+        
         painelBusca.add(labelBusca);
         painelBusca.add(listaVerticePartida);
         painelBusca.add(botaoPesquisar);
+        painelBusca.add(listaDeResultado);
         painelBusca.setLayout(null);
 
         
@@ -271,10 +292,13 @@ public class GUI extends JFrame implements ActionListener{
         
         listaVAway.removeAllElements();
         listaVHome.removeAllElements();
+        listaVPartida.removeAllElements();
         for (int i = 0; i < vertices.size(); i++) {
             listaVHome.insertElementAt(vertices.get(i).getCidade(), i);
             listaVAway.insertElementAt(vertices.get(i).getCidade(), i);
+            listaVPartida.insertElementAt(vertices.get(i).getCidade(), i);
         }
+        listaVerticePartida.setModel(listaVPartida);
         listaVesticesHome.setModel(listaVHome);
         listaVesticesAway.setModel(listaVAway);
     }
