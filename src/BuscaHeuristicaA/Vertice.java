@@ -48,6 +48,15 @@ public class Vertice {
         return v;
     }
     
+    public boolean verifica_vizinhanca(Vertice vizinho, ArrayList<Aresta> arestas) {
+        for(int i = 0; i < arestas.size(); i++){
+            if((arestas.get(i).getVertice1().equals(this) && arestas.get(i).getVertice2().equals(vizinho)) || (arestas.get(i).getVertice2().equals(this) && arestas.get(i).getVertice1().equals(vizinho))){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public double getDistanciaParaVizinho(Vertice vizinho, ArrayList<Aresta> arestas){
         //ArrayList<Vertice> v = new ArrayList<>();
         //System.out.println(arestas.size());

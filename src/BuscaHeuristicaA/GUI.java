@@ -25,8 +25,10 @@ public class GUI extends JFrame implements ActionListener{
     String stringAlvo;
     Alvo alvo;
     ArrayList<Vertice> vertices = new ArrayList<>();
+    ArrayList<Aresta> arestas = new ArrayList<>();
     JComboBox listaVesticesHome, listaVesticesAway;
-
+    DefaultComboBoxModel listaVHome = new DefaultComboBoxModel();
+    DefaultComboBoxModel listaVAway = new DefaultComboBoxModel();
     public GUI(String stringAlvo) {
         this.stringAlvo = stringAlvo;
         
@@ -200,19 +202,44 @@ public class GUI extends JFrame implements ActionListener{
                  atualizaComboBox();
              } 
          }else if(e.getActionCommand().equals("Adicionar aresta")){
-             System.out.println("Adicionando aresta");
-             Vertice sel = (Vertice) listaVesticesHome.getSelectedItem();
-             System.out.println(sel.getCidade());
+             try {
+                 if(!campoNovaArestaDist.getText().equals("")){
+                     try {
+                         if(listaVesticesHome.getSelectedIndex() == listaVesticesAway.getSelectedIndex()){
+                             JOptionPane.showMessageDialog(null, "Não se pode haver arestas para si mesmo");
+                         }else if(vertices.get(listaVesticesHome.getSelectedIndex()).verifica_vizinhanca(vertices.get(listaVesticesAway.getSelectedIndex()) ,arestas)){
+                             JOptionPane.showMessageDialog(null, "Já existe esta aresta");
+                         }else{
+                             Double distancia = Double.parseDouble(campoNovaArestaDist.getText());
+                            System.out.println("Adicionando aresta");
+                            //Vertice sel = (Vertice) listaVesticesHome.getSelectedItem();
+                            System.out.println(vertices.get(listaVesticesHome.getSelectedIndex()).getCidade());
+                            System.out.println(vertices.get(listaVesticesAway.getSelectedIndex()).getCidade());
+                            arestas.add(new Aresta(vertices.get(listaVesticesHome.getSelectedIndex()), vertices.get(listaVesticesAway.getSelectedIndex()), distancia));
+                         }                        
+                     } catch (Exception i) {
+                         System.out.println(i);
+                         JOptionPane.showMessageDialog(null, "Insira informações válidas");
+                     }
+                 }
+                
+             } catch (ArrayIndexOutOfBoundsException a) {
+                 JOptionPane.showMessageDialog(null, "Insira informações válidas");
+             }
+             
          }
     }
     
     public void atualizaComboBox(){
-        listaVesticesHome.removeAllItems();
-        listaVesticesAway.removeAllItems();
+        
+        listaVAway.removeAllElements();
+        listaVHome.removeAllElements();
         for (int i = 0; i < vertices.size(); i++) {
-            listaVesticesHome.addItem(vertices.get(i));
-            listaVesticesAway.addItem(vertices.get(i));
+            listaVHome.insertElementAt(vertices.get(i).getCidade(), i);
+            listaVAway.insertElementAt(vertices.get(i).getCidade(), i);
         }
+        listaVesticesHome.setModel(listaVHome);
+        listaVesticesAway.setModel(listaVAway);
     }
     
     public boolean validarCamposVertices(String nome, String dist){
