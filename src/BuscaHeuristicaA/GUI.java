@@ -18,7 +18,7 @@ import javax.swing.*;
 public class GUI extends JFrame implements ActionListener{
     JTextField campoNovoVertice;
     JTextField campoNovoVerticeDistancia, campoNovaArestaDist;
-    JButton botaoNovoVertice, botaoLimparVertices, botaoLimparArestas;
+    JButton botaoNovoVertice, botaoLimparVertices, botaoLimparArestas, botaoPesquisar;
     JPanel listaDeVertices, listaDeArestas;
     JList lista, listaAresta;
     DefaultListModel modelo, modeloAresta;
@@ -26,9 +26,10 @@ public class GUI extends JFrame implements ActionListener{
     Alvo alvo;
     ArrayList<Vertice> vertices = new ArrayList<>();
     ArrayList<Aresta> arestas = new ArrayList<>();
-    JComboBox listaVesticesHome, listaVesticesAway;
+    JComboBox listaVesticesHome, listaVesticesAway, listaVerticePartida;
     DefaultComboBoxModel listaVHome = new DefaultComboBoxModel();
     DefaultComboBoxModel listaVAway = new DefaultComboBoxModel();
+    DefaultComboBoxModel listaVPartida = new DefaultComboBoxModel();
     
     public GUI(String stringAlvo) {
         this.stringAlvo = stringAlvo;
@@ -40,6 +41,7 @@ public class GUI extends JFrame implements ActionListener{
         JTabbedPane tabs = new JTabbedPane();
         JPanel painelVertices = new JPanel();
         JPanel painelArestas = new JPanel();
+        JPanel painelBusca = new JPanel();
         
         /* Elementos visuais do painelVertices */
         JLabel labelNovoVertice = new JLabel("Adicione um novo vértice:");
@@ -99,6 +101,7 @@ public class GUI extends JFrame implements ActionListener{
         painelVertices.add(botaoNovoVertice);
         painelVertices.add(listaDeVertices);
         painelVertices.add(botaoLimparVertices);
+        painelVertices.setLayout(null);
         
         /* Elementos visuais de painelArestas */
         JLabel labelNovaAresta = new JLabel("Adicione uma nova aresta:");
@@ -113,9 +116,6 @@ public class GUI extends JFrame implements ActionListener{
         listaVesticesHome.setSize(100, 25);
         listaVesticesHome.setLocation(90, 50);
         
-        //campoNovoVertice = new JTextField();
-        //campoNovoVertice.setSize(200, 25);
-        //campoNovoVertice.setLocation(80, 50);
         
         JLabel labelNovoArestaAway = new JLabel("Chegada:");
         labelNovoArestaAway.setSize(100, 25);
@@ -124,10 +124,7 @@ public class GUI extends JFrame implements ActionListener{
         listaVesticesAway = new JComboBox();
         listaVesticesAway.setSize(100, 25);
         listaVesticesAway.setLocation(300, 50);
-        
-        //campoNovoVerticeDistancia = new JTextField();
-        //campoNovoVerticeDistancia.setSize(80, 25);
-        //campoNovoVerticeDistancia.setLocation(440, 50);
+
         
         JLabel labelNovaArestaDist = new JLabel("Dist.:");
         labelNovaArestaDist.setSize(100, 25);
@@ -176,10 +173,25 @@ public class GUI extends JFrame implements ActionListener{
         painelArestas.add(campoNovaArestaDist);
         painelArestas.add(botaoLimparArestas);
         painelArestas.setLayout(null);
+           
+        /* Elementos visuais de painelBusca */
+        JLabel labelBusca = new JLabel("De onde você quer partir para chegar a "+stringAlvo+":");
+        labelBusca.setSize(370, 25);
+        labelBusca.setLocation(20, 20);
         
+        listaVerticePartida = new JComboBox();
+        listaVerticePartida.setSize(180, 25);
+        listaVerticePartida.setLocation(350, 20);
         
+        botaoPesquisar = new JButton("Vá pelo caminho ótimo!");
+        botaoPesquisar.setSize(190, 25);
+        botaoPesquisar.setLocation(540, 20);
         
-        painelVertices.setLayout(null);
+        painelBusca.add(labelBusca);
+        painelBusca.add(listaVerticePartida);
+        painelBusca.add(botaoPesquisar);
+        painelBusca.setLayout(null);
+
         
         botaoNovoVertice.addActionListener(this);
         botaoNovaAresta.addActionListener(this);
@@ -189,6 +201,7 @@ public class GUI extends JFrame implements ActionListener{
         
         tabs.addTab("Vértices", painelVertices);
         tabs.addTab("Arestas", painelArestas);
+        tabs.addTab("Buscar melhor caminho A*", painelBusca);
         
         add(tabs);
         
