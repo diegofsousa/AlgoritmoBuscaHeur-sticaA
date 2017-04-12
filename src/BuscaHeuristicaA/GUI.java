@@ -18,7 +18,7 @@ import javax.swing.*;
 public class GUI extends JFrame implements ActionListener{
     JTextField campoNovoVertice;
     JTextField campoNovoVerticeDistancia, campoNovaArestaDist;
-    JButton botaoNovoVertice;
+    JButton botaoNovoVertice, botaoLimparVertices, botaoLimparArestas;
     JPanel listaDeVertices, listaDeArestas;
     JList lista, listaAresta;
     DefaultListModel modelo, modeloAresta;
@@ -29,6 +29,7 @@ public class GUI extends JFrame implements ActionListener{
     JComboBox listaVesticesHome, listaVesticesAway;
     DefaultComboBoxModel listaVHome = new DefaultComboBoxModel();
     DefaultComboBoxModel listaVAway = new DefaultComboBoxModel();
+    
     public GUI(String stringAlvo) {
         this.stringAlvo = stringAlvo;
         
@@ -71,7 +72,7 @@ public class GUI extends JFrame implements ActionListener{
         
         modelo = new DefaultListModel();
         lista = new JList(modelo);
-        lista.setSize(700, 200);
+        lista.setSize(700, 195);
         lista.setLocation(50, 65);
         
         
@@ -86,6 +87,10 @@ public class GUI extends JFrame implements ActionListener{
         listaDeVertices.setLocation(30, 105);
         listaDeVertices.add(scrollPane);
         
+        botaoLimparVertices = new JButton("Limpar vertices");
+        botaoLimparVertices.setSize(160, 25);
+        botaoLimparVertices.setLocation(300, 307);
+        
         painelVertices.add(labelNovoVertice);
         painelVertices.add(labelNovoVerticeNome);
         painelVertices.add(campoNovoVertice);
@@ -93,6 +98,7 @@ public class GUI extends JFrame implements ActionListener{
         painelVertices.add(campoNovoVerticeDistancia);
         painelVertices.add(botaoNovoVertice);
         painelVertices.add(listaDeVertices);
+        painelVertices.add(botaoLimparVertices);
         
         /* Elementos visuais de painelArestas */
         JLabel labelNovaAresta = new JLabel("Adicione uma nova aresta:");
@@ -155,6 +161,10 @@ public class GUI extends JFrame implements ActionListener{
         listaDeArestas.setLocation(30, 105);
         listaDeArestas.add(scrollPaneAresta);
         
+        botaoLimparArestas = new JButton("Limpar arestas");
+        botaoLimparArestas.setSize(160, 25);
+        botaoLimparArestas.setLocation(300, 307);
+        
         painelArestas.add(labelNovaAresta);
         painelArestas.add(labelNovoArestaHome);
         painelArestas.add(botaoNovaAresta);
@@ -164,6 +174,7 @@ public class GUI extends JFrame implements ActionListener{
         painelArestas.add(listaVesticesAway);
         painelArestas.add(labelNovaArestaDist);
         painelArestas.add(campoNovaArestaDist);
+        painelArestas.add(botaoLimparArestas);
         painelArestas.setLayout(null);
         
         
@@ -172,6 +183,8 @@ public class GUI extends JFrame implements ActionListener{
         
         botaoNovoVertice.addActionListener(this);
         botaoNovaAresta.addActionListener(this);
+        botaoLimparVertices.addActionListener(this);
+        botaoLimparArestas.addActionListener(this);
         
         
         tabs.addTab("Vértices", painelVertices);
@@ -216,6 +229,7 @@ public class GUI extends JFrame implements ActionListener{
                             System.out.println(vertices.get(listaVesticesHome.getSelectedIndex()).getCidade());
                             System.out.println(vertices.get(listaVesticesAway.getSelectedIndex()).getCidade());
                             arestas.add(new Aresta(vertices.get(listaVesticesHome.getSelectedIndex()), vertices.get(listaVesticesAway.getSelectedIndex()), distancia));
+                            modeloAresta.add(0, vertices.get(listaVesticesHome.getSelectedIndex()).getCidade() + " até "+ vertices.get(listaVesticesAway.getSelectedIndex()).getCidade() + " - Distância: " + distancia);
                          }                        
                      } catch (Exception i) {
                          System.out.println(i);
@@ -227,6 +241,16 @@ public class GUI extends JFrame implements ActionListener{
                  JOptionPane.showMessageDialog(null, "Insira informações válidas");
              }
              
+         }else if(e.getActionCommand().equals("Limpar vertices")){
+             arestas.clear();
+             vertices.clear();
+             listaVAway.removeAllElements();
+             listaVHome.removeAllElements();
+             modelo.removeAllElements();
+             modeloAresta.removeAllElements();
+         }else if(e.getActionCommand().equals("Limpar arestas")){
+             arestas.clear();
+             modeloAresta.removeAllElements();
          }
     }
     
