@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Main {
     public static void main(String[] args) {
-        
+        /*
         Alvo bucharest =  new Alvo(new Vertice("Bucharest", 0));
         Vertice arad = new Vertice("Arad", 366);
         Vertice craiova = new Vertice("Craiova", 160);
@@ -94,9 +94,9 @@ public class Main {
         for(int i=0;i<resultado.size(); i++){
             System.out.println("Visitou: "+ resultado.get(i).getEstagio_atual().getCidade() +" e a distancia gradual foi: "+ resultado.get(i).getSomatorio_caminho());
         }
+        */
         
         
-        /*
         Alvo floriano =  new Alvo(new Vertice("Floriano", 0));
         
         Vertice oeiras = new Vertice("Oeiras", 80);        
@@ -117,7 +117,7 @@ public class Main {
         //Vertice a = picos.vizinhos(arestas).get(4);
         
         //picos.getDistanciaParaVizinho(picos.vizinhos(arestas).get(4), arestas);
-         /*
+         
         for(int i=0; i<picos.vizinhos(arestas).size(); i++){
             System.out.println(picos.vizinhos(arestas).get(i).getCidade());
             //System.out.println(picos.vizinhos(arestas).get(i).getCidade());
@@ -138,7 +138,7 @@ public class Main {
         for(int i=0;i<resultado.size(); i++){
             System.out.println("Visitou: "+ resultado.get(i).getEstagio_atual().getCidade() +" e a distancia gradual foi: "+ resultado.get(i).getSomatorio_caminho());
         }
-        */
+        
         //System.out.println(melhor);
         
         //System.out.println(picos.getDistanciaParaVizinho(oeiras, arestas));

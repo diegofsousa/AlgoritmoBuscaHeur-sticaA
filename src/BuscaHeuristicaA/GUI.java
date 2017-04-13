@@ -26,6 +26,7 @@ public class GUI extends JFrame implements ActionListener{
     Alvo alvo;
     ArrayList<Vertice> vertices = new ArrayList<>();
     ArrayList<Aresta> arestas = new ArrayList<>();
+    ArrayList<CaminhoResultante> resultado = new ArrayList<>();
     JComboBox listaVesticesHome, listaVesticesAway, listaVerticePartida;
     DefaultComboBoxModel listaVHome = new DefaultComboBoxModel();
     DefaultComboBoxModel listaVAway = new DefaultComboBoxModel();
@@ -194,16 +195,13 @@ public class GUI extends JFrame implements ActionListener{
         
         
         JScrollPane scrollPaneResultado = new JScrollPane();
-
-        //modelo.add(0, "diego fernando");
-        
-        
+ 
         
         scrollPaneResultado.getViewport().add(listaResultado);
 
         listaDeResultado = new JPanel();
         listaDeResultado.setLayout(new GridLayout(0, 2));
-        listaDeResultado.setSize(1500,250);
+        listaDeResultado.setSize(1500,230);
         listaDeResultado.setLocation(30, 85);
         listaDeResultado.add(scrollPaneResultado);
         
@@ -218,6 +216,7 @@ public class GUI extends JFrame implements ActionListener{
         botaoNovaAresta.addActionListener(this);
         botaoLimparVertices.addActionListener(this);
         botaoLimparArestas.addActionListener(this);
+        botaoPesquisar.addActionListener(this);
         
         
         tabs.addTab("Vértices", painelVertices);
@@ -230,15 +229,11 @@ public class GUI extends JFrame implements ActionListener{
         setLayout(new GridLayout());
         setTitle("Busca heurística A*");
         setSize(800,400);
+        setLocation(300,200);
+        setResizable(false);
         setVisible(true);
     }
     
-    
-    
-    public static void main(String[] args) {
-        new GUI(null);
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
          if(e.getActionCommand().equals("Adicionar vértice")){
@@ -280,11 +275,40 @@ public class GUI extends JFrame implements ActionListener{
              vertices.clear();
              listaVAway.removeAllElements();
              listaVHome.removeAllElements();
+             listaVPartida.removeAllElements();
              modelo.removeAllElements();
              modeloAresta.removeAllElements();
+             modeloResultado.removeAllElements();
+             resultado.clear();
          }else if(e.getActionCommand().equals("Limpar arestas")){
              arestas.clear();
              modeloAresta.removeAllElements();
+             modeloResultado.removeAllElements();
+             resultado.clear();
+             listaVPartida.removeAllElements();
+         }else if(e.getActionCommand().equals("Vá pelo caminho ótimo!")){
+             modeloResultado.removeAllElements();
+             resultado.clear();
+             try {
+                if(!listaVPartida.getSelectedItem().equals("")){
+                    System.out.println("Calculando rotas...");
+                    
+                    if(!(vertices.get(listaVerticePartida.getSelectedIndex()) == alvo.getAlvo())){
+                        resultado = alvo.melhor_caminho(vertices.get(listaVerticePartida.getSelectedIndex()), 0, arestas, resultado);
+                        for (int i = 0; i < resultado.size(); i++) {
+                            modeloResultado.add(i, "Visitou: "+ resultado.get(i).getEstagio_atual().getCidade() +" e a distancia gradual foi: "+ resultado.get(i).getSomatorio_caminho());
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Pra que partir para o alvo se já está no alvo? Eu hein! :/");
+                    }
+                } 
+             } catch (NullPointerException e1) {
+                 JOptionPane.showMessageDialog(null, "Insira informações válidas");
+             } 
+             
+             
+             
+             
          }
     }
     
@@ -298,6 +322,7 @@ public class GUI extends JFrame implements ActionListener{
             listaVAway.insertElementAt(vertices.get(i).getCidade(), i);
             listaVPartida.insertElementAt(vertices.get(i).getCidade(), i);
         }
+        //listaVPartida.removeElementAt(0);
         listaVerticePartida.setModel(listaVPartida);
         listaVesticesHome.setModel(listaVHome);
         listaVesticesAway.setModel(listaVAway);

@@ -28,6 +28,7 @@ public class Alvo {
 
     
     public ArrayList<CaminhoResultante> melhor_caminho(Vertice inicio, double tam_caminho, ArrayList<Aresta> arestas, ArrayList<CaminhoResultante> caminho){
+        System.out.println("Vertice atual: "+inicio.getCidade());
         if(inicio.getDistanceParaOAlvo() == 0){
             System.out.println("Busca acabou!");
             return caminho;
