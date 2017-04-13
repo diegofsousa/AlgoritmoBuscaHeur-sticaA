@@ -302,8 +302,8 @@ public class GUI extends JFrame implements ActionListener{
                         JOptionPane.showMessageDialog(null, "Pra que partir para o alvo se já está no alvo? Eu hein! :/");
                     }
                 } 
-             } catch (NullPointerException e1) {
-                 JOptionPane.showMessageDialog(null, "Insira informações válidas");
+             } catch (Exception e1) {
+                 JOptionPane.showMessageDialog(null, "Erro ao processar calculo");
              } 
              
              
