@@ -285,7 +285,6 @@ public class GUI extends JFrame implements ActionListener{
              modeloAresta.removeAllElements();
              modeloResultado.removeAllElements();
              resultado.clear();
-             listaVPartida.removeAllElements();
          }else if(e.getActionCommand().equals("Vá pelo caminho ótimo!")){
              modeloResultado.removeAllElements();
              resultado.clear();
@@ -303,6 +302,7 @@ public class GUI extends JFrame implements ActionListener{
                     }
                 } 
              } catch (Exception e1) {
+                 e1.printStackTrace();
                  JOptionPane.showMessageDialog(null, "Erro ao processar calculo");
              } 
              

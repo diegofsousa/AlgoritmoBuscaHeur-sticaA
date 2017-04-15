@@ -37,10 +37,11 @@ public class Alvo {
         double calculo_atual = tam_caminho + inicio.getDistanceParaOAlvo();
         //System.out.println("Variavel menor instanciada com: "+calculo_atual);
         Vertice aux = null;
-        double menor = tam_caminho + inicio.getDistanciaParaVizinho(inicio.vizinhos(arestas).get(1), arestas) + inicio.vizinhos(arestas).get(1).getDistanceParaOAlvo();
-        aux = inicio.vizinhos(arestas).get(1);
+
+        double menor = tam_caminho + inicio.getDistanciaParaVizinho(inicio.vizinhos(arestas).get(0), arestas) + inicio.vizinhos(arestas).get(0).getDistanceParaOAlvo();
+        aux = inicio.vizinhos(arestas).get(0);
         double aux_tam_caminho = 0;
-        double menori = inicio.getDistanciaParaVizinho(inicio.vizinhos(arestas).get(1), arestas) + tam_caminho;
+        double menori = inicio.getDistanciaParaVizinho(inicio.vizinhos(arestas).get(0), arestas) + tam_caminho;
         for(int i=0; i<inicio.vizinhos(arestas).size(); i++){
             System.out.println("Testando: "+inicio.vizinhos(arestas).get(i).getCidade());
             System.out.println("Distancia de "+ inicio.getCidade()+" para "+ inicio.vizinhos(arestas).get(i).getCidade() + ": "+inicio.getDistanciaParaVizinho(inicio.vizinhos(arestas).get(i), arestas));
